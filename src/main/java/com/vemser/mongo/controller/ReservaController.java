@@ -25,12 +25,10 @@ public class ReservaController {
         return reservaService.findAll();
     }
 
-
     @PostMapping
     public ReservaEntity save(@RequestBody ReservaCreateDTO reservaCreateDTO){
         return reservaService.save(reservaCreateDTO);
     }
-
 
     @GetMapping("/{idReserva}")
     public ReservaEntity findById( @PathVariable("idReserva") String id) throws RegraDeNegocioException {

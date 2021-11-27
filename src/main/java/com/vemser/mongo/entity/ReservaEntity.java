@@ -21,5 +21,4 @@ public class ReservaEntity {
     private String cidade;
     private String estado;
     private int telefone;
-
 }
