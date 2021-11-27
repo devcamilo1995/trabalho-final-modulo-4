@@ -1,7 +1,9 @@
 package com.vemser.mongo.controller;
 
 
+import com.vemser.mongo.dto.ReservaCreateDTO;
 import com.vemser.mongo.entity.ReservaEntity;
+import com.vemser.mongo.exceptions.RegraDeNegocioException;
 import com.vemser.mongo.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,20 @@ public class ReservaController {
 
 
     @PostMapping
-    public ReservaEntity save(@RequestBody ReservaEntity reservaEntity){
-        return reservaService.save(reservaEntity);
+    public ReservaEntity save(@RequestBody ReservaCreateDTO reservaCreateDTO){
+        return reservaService.save(reservaCreateDTO);
+    }
+
+
+    @GetMapping("/{idReserva}")
+    public ReservaEntity findById( @PathVariable("idReserva") String id) throws RegraDeNegocioException {
+        return reservaService.findById(id);
+    }
+
+    @DeleteMapping("/{idReserva}")
+    public void delete( @PathVariable("idReserva") String id) throws RegraDeNegocioException {
+        reservaService.delete(id);
     }
 }
+
+
