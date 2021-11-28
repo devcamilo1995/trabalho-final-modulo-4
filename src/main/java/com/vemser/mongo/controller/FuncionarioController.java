@@ -20,11 +20,8 @@ public class FuncionarioController {
     private final FuncionarioService funcionarioService;
 
     @GetMapping
-    public List<FuncionarioEntity> list(){return funcionarioService.findAll();}
-
-    @PostMapping
-    public FuncionarioEntity save(@RequestBody FuncionarioCreateDTO funcionarioCreateDTO){
-        return funcionarioService.save(funcionarioCreateDTO);
+    public List<FuncionarioEntity> list() {
+        return funcionarioService.findAll();
     }
 
     @GetMapping("/{idFuncionario}")
@@ -32,8 +29,18 @@ public class FuncionarioController {
         return funcionarioService.findById(id);
     }
 
+    @PostMapping
+    public FuncionarioEntity save(@RequestBody FuncionarioCreateDTO funcionarioCreateDTO){
+        return funcionarioService.save(funcionarioCreateDTO);
+    }
+
     @DeleteMapping("/{idFuncionario}")
     public void delete(@PathVariable("idFuncionario") String id) throws RegraDeNegocioException{
         funcionarioService.delete(id);
+    }
+
+    @PutMapping("/{idFuncionario}")
+    public FuncionarioEntity update(@PathVariable("idFuncionario") String id, @RequestBody FuncionarioEntity funcionarioEntity) throws RegraDeNegocioException{
+    return funcionarioService.update(id, funcionarioEntity);
     }
 }

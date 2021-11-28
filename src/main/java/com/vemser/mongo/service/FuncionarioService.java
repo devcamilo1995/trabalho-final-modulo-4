@@ -24,12 +24,20 @@ public class FuncionarioService {
 
     public List<FuncionarioEntity> findAll(){return funcionarioRepository.findAll();}
 
-    public long count() {return funcionarioRepository.count();}
+//    public long count() {return funcionarioRepository.count();}
 
     public FuncionarioEntity findById(String id) throws RegraDeNegocioException{
         return funcionarioRepository.findById(id).
                 orElseThrow(() -> new RegraDeNegocioException("Funcionário não encontrado"));
+
     }
+
+    public FuncionarioEntity update (String id, FuncionarioEntity funcionarioEntity) throws RegraDeNegocioException {
+        findById(id);
+        funcionarioEntity.setId(id);
+        return funcionarioRepository.save(funcionarioEntity);
+    }
+
 
     public void delete(String id) throws RegraDeNegocioException{
         FuncionarioEntity funcionarioEntity = findById(id);
