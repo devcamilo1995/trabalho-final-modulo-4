@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Validated
@@ -26,8 +27,13 @@ public class ReservaController {
     }
 
     @PostMapping
-    public ReservaEntity save(@RequestBody ReservaCreateDTO reservaCreateDTO){
+    public ReservaEntity save(@RequestBody ReservaCreateDTO reservaCreateDTO) throws RegraDeNegocioException {
         return reservaService.save(reservaCreateDTO);
+    }
+
+    @PutMapping("/{idReserva}")
+    public ReservaEntity update(@Valid @PathVariable("idReserva") String id, @Valid @RequestBody ReservaEntity reservaEntity) throws RegraDeNegocioException {
+        return reservaService.update(id,reservaEntity);
     }
 
     @GetMapping("/{idReserva}")
